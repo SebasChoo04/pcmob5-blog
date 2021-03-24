@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import axios from 'axios';
+
+const API = "https://yjsoon2.pythonanywhere.com";
+const API_BLOGS = "/posts";
 
 export default function IndexScreen({ navigation, route }) {
-  const [blogs, setBlogs] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   // This is to set up the top right button
   useEffect(() => {
@@ -23,6 +27,21 @@ export default function IndexScreen({ navigation, route }) {
       ),
     });
   });
+
+  useEffect(() => {
+    getPosts()
+  }, [])
+
+  async function getPosts() {
+    try {
+      const response = await axios.get(API + API_BLOGS);
+      console.log(response.data);
+      setPosts(response.data);
+    } catch (error) {
+      console.log("Error getting data");
+      console.log(error);
+    }
+  }
 
   // Monitor route.params for changes and add items to the database
 
@@ -52,7 +71,7 @@ export default function IndexScreen({ navigation, route }) {
       >
         <Text>{item.title}</Text>
         <TouchableOpacity onPress={() => deleteNote(item.id)}>
-          <Ionicons name="trash" size={16} color="#944" />
+          <FontAwesome name="trash" size={16} color="#944" />
         </TouchableOpacity>
       </View>
     );
@@ -61,7 +80,7 @@ export default function IndexScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={blogs}
+        data={posts}
         renderItem={renderItem}
         style={{ width: "100%" }}
         keyExtractor={(item) => item.id.toString()}
