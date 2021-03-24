@@ -67,11 +67,14 @@ export default function IndexScreen({ navigation, route }) {
           borderBottomWidth: 1,
           flexDirection: "row",
           justifyContent: "space-between",
-        }}
-      >
-        <Text>{item.title}</Text>
+          alignItems: "center"
+        }}>
+        <View>
+          <Text style={{fontWeight: 'bold', fontSize: 20}}>{item.title}</Text>
+          <Text>{item.content}</Text>
+        </View>
         <TouchableOpacity onPress={() => deleteNote(item.id)}>
-          <FontAwesome name="trash" size={16} color="#944" />
+          <FontAwesome name="trash" size={25} color="#944" />
         </TouchableOpacity>
       </View>
     );
