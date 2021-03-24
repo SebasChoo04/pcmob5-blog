@@ -1,21 +1,46 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, TextInput } from "react-native";
+import axios from 'axios';
+
+const API = "https://yjsoon2.pythonanywhere.com";
+const API_ADD = "/create";
 
 export default function AddScreen({ navigation }) {
-  const [text, setText] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  async function addPost() {
+    try {  
+      const response = await axios.post(API + API_ADD, {
+        "content": content,
+        "title": title
+      })
+      console.log(response.data)
+      navigation.navigate("Blogs")
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <View style={[styles.container, { backgroundColor: "white" }]}>
-      <Text style={{ fontSize: 24 }}>What do you want to add?</Text>
+      <Text style={{ fontSize: 24 }}>Title</Text>
       <TextInput
         style={styles.textInput}
-        value={text}
-        onChangeText={(input) => setText(input)}
+        value={title}
+        onChangeText={(input) => setTitle(input)}
+      />
+      <Text style={{ fontSize: 24, marginTop: 10 }}>What do you want to post?</Text>
+      <TextInput
+        style={styles.textInput}
+        value={content}
+        onChangeText={(input) => setContent(input)}
       />
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Notes", { text })}
+          onPress={() => addPost()}
         >
           <Text style={styles.buttonText}>Save</Text>
         </TouchableOpacity>
