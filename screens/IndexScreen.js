@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList } from "react-native
 import { FontAwesome } from "@expo/vector-icons";
 
 export default function IndexScreen({ navigation, route }) {
-  const [blogs, setBlogs] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   // This is to set up the top right button
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function IndexScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={blogs}
+        data={posts}
         renderItem={renderItem}
         style={{ width: "100%" }}
         keyExtractor={(item) => item.id.toString()}
