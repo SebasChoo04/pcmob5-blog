@@ -75,17 +75,17 @@ export default function IndexScreen({ navigation, route }) {
   // The function to render each row in our FlatList
   function renderItem({ item }) {
     return (
-      <TouchableOpacity onPress={() => postDetails(item.id)}>
         <View style={styles.listItem}>
-          <View>
-            <Text style={styles.postTitle}>{item.title}</Text>
-            <Text>{item.content}</Text>
-          </View>
+          <TouchableOpacity onPress={() => postDetails(item.id)}>
+            <View>
+              <Text style={styles.postTitle}>{item.title}</Text>
+              <Text>{item.content}</Text>
+            </View>
+          </TouchableOpacity>  
           <TouchableOpacity onPress={() => deletePost(item.id)}>
             <FontAwesome name="trash" size={25} color="#944" />
           </TouchableOpacity>
         </View>
-      </TouchableOpacity>  
     );
   }
 
