@@ -15,8 +15,8 @@ export default function AddScreen({ navigation }) {
         "content": content,
         "title": title
       })
-      console.log(response.data)
-      navigation.navigate("Blogs")
+      console.log("TEST" + JSON.stringify(response.data))
+      navigation.navigate("Blogs", { newPost: response.data })
     }
     catch (err) {
       console.log(err);

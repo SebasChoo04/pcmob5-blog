@@ -32,6 +32,12 @@ export default function IndexScreen({ navigation, route }) {
     getPosts()
   }, [])
 
+  useEffect(() => {
+    if (route.params?.newPost) {
+      setPosts([...posts, route.params.newPost])
+    }
+  }, [route.params?.newPost])
+
   async function getPosts() {
     try {
       const response = await axios.get(API + API_BLOGS);
@@ -43,8 +49,6 @@ export default function IndexScreen({ navigation, route }) {
     }
   }
 
-  // Monitor route.params for changes and add items to the database
-
   function addPost() {
     navigation.navigate("Add Screen");
   }
@@ -52,7 +56,6 @@ export default function IndexScreen({ navigation, route }) {
   // This deletes an individual note
   function deleteNote(id) {
     console.log("Deleting " + id);
-
     try {
       const response = axios.delete(API + API_BLOGS + "/" + id)
       console.log(response.data)
