@@ -52,6 +52,15 @@ export default function IndexScreen({ navigation, route }) {
   // This deletes an individual note
   function deleteNote(id) {
     console.log("Deleting " + id);
+
+    try {
+      const response = axios.delete(API + API_BLOGS + "/" + id)
+      console.log(response.data)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setPosts(posts => posts.filter(item => item.id != id))
+    }
     
   }
 
