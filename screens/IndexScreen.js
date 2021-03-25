@@ -34,7 +34,7 @@ export default function IndexScreen({ navigation, route }) {
 
   useEffect(() => {
     if (route.params?.newPost) {
-      setPosts([...posts, route.params.newPost])
+      getPosts()
     }
   }, [route.params?.newPost])
 
@@ -54,7 +54,7 @@ export default function IndexScreen({ navigation, route }) {
   }
 
   // This deletes an individual note
-  function deleteNote(id) {
+  function deletePost(id) {
     console.log("Deleting " + id);
     try {
       const response = axios.delete(API + API_BLOGS + "/" + id)
@@ -64,22 +64,28 @@ export default function IndexScreen({ navigation, route }) {
     } finally {
       setPosts(posts => posts.filter(item => item.id != id))
     }
-    
+  }
+
+  function postDetails(id) {
+    const currentPost = posts.filter(post => post.id === id)[0]
+    console.log(currentPost)
+    navigation.navigate("Edit Screen", {currentPost: currentPost})
   }
 
   // The function to render each row in our FlatList
   function renderItem({ item }) {
     return (
-      <View
-        style={styles.listItem}>
-        <View>
-          <Text style={styles.postTitle}>{item.title}</Text>
-          <Text>{item.content}</Text>
+      <TouchableOpacity onPress={() => postDetails(item.id)}>
+        <View style={styles.listItem}>
+          <View>
+            <Text style={styles.postTitle}>{item.title}</Text>
+            <Text>{item.content}</Text>
+          </View>
+          <TouchableOpacity onPress={() => deletePost(item.id)}>
+            <FontAwesome name="trash" size={25} color="#944" />
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => deleteNote(item.id)}>
-          <FontAwesome name="trash" size={25} color="#944" />
-        </TouchableOpacity>
-      </View>
+      </TouchableOpacity>  
     );
   }
 

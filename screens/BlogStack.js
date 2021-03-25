@@ -28,9 +28,6 @@ export default function BlogStack() {
           },
         }}
       />
-      <InnerStack.Screen name="Add" component={AddScreen}/>
-      <InnerStack.Screen name="Edit" component={EditScreen}/>
-
     </InnerStack.Navigator>
   );
 }

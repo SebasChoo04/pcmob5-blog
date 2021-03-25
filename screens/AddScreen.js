@@ -42,7 +42,7 @@ export default function AddScreen({ navigation }) {
           style={styles.button}
           onPress={() => addPost()}
         >
-          <Text style={styles.buttonText}>Save</Text>
+          <Text style={styles.buttonText}>Add</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -51,7 +51,6 @@ export default function AddScreen({ navigation }) {
           <Text style={styles.buttonText}>Dismiss</Text>
         </TouchableOpacity>
       </View>
-      {/* <Text>{text.toUpperCase()}</Text> */}
     </View>
   );
 }
