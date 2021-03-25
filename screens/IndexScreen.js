@@ -71,18 +71,9 @@ export default function IndexScreen({ navigation, route }) {
   function renderItem({ item }) {
     return (
       <View
-        style={{
-          padding: 10,
-          paddingTop: 20,
-          paddingBottom: 20,
-          borderBottomColor: "#ccc",
-          borderBottomWidth: 1,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center"
-        }}>
+        style={styles.listItem}>
         <View>
-          <Text style={{fontWeight: 'bold', fontSize: 20}}>{item.title}</Text>
+          <Text style={styles.postTitle}>{item.title}</Text>
           <Text>{item.content}</Text>
         </View>
         <TouchableOpacity onPress={() => deleteNote(item.id)}>
@@ -111,4 +102,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  listItem: {
+    padding: 10,
+    paddingTop: 20,
+    paddingBottom: 20,
+    borderBottomColor: "#ccc",
+    borderBottomWidth: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
+  }, 
+  postTitle: {
+    fontWeight: 'bold', 
+    fontSize: 20
+  }
 });
